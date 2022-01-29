@@ -2,6 +2,7 @@ const express = require('express')
 const breads = express.Router()
 const Bread = require('../models/breads.js')
 const Baker = require('../models/baker')
+const baker = require('./bakers_controllers.js')
 
 // INDEX
 breads.get('/', (req, res) => {
@@ -18,7 +19,7 @@ breads.get('/', (req, res) => {
 breads.get('/new', (req, res) => {
     Baker.find()
       .then (foundBakers => {
-        res.redirect('new', {
+        res.render('new', {
           bakers: foundBakers
         })
       })
@@ -26,24 +27,30 @@ breads.get('/new', (req, res) => {
 
 // EDIT
 breads.get('/:id/edit', (req, res) => {
-  Bread.findById(req.params.id)
-    .then(foundBread => {
-      res.render('edit', {
-        bread: foundBread
-      })
+  Baker.find()
+    .then(foundBakers => {
+      Bread.findById(req.params.id)
+        .then(foundBread => {
+          res.render('edit', {
+            bread: foundBread,
+            bakers: foundBakers
+          })
+        })
     })
 })
 
 // SHOW
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
-      .then(foundBread => {
-        const bakedBy = foundBread.getBakedBy()
-        console.log(bakedBy)
-        res.render("show", {
-          bread: foundBread
-        })
+    .populate('baker')
+    .then(foundBread => {
+      res.render('show', {
+        bread: foundBread
       })
+    })
+    .catch (err => {
+      res.send('404')
+    })
 })
 
 // CREATE
