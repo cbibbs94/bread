@@ -27,12 +27,17 @@ app.get('/', (req, res) => {
 // Breads
   const breadsController = require('./controllers/breads_controller.js')
   app.use('/breads', breadsController)
-
+  
+  //Bakers 
+  const bakersController = require('./controllers/bakers_controllers')
+  app.use('/bakers', bakersController)
+  
   app.get('*', (req, res) => {
     res.send('404')
   })
-  
-// LISTEN
+
+
+  // LISTEN
 app.listen(PORT, () => {
   console.log('nomming at port', PORT);
 })
