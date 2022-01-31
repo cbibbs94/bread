@@ -17,7 +17,7 @@ app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
-mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, () => { console.log('Oh Snap! We got that exclusive intel!! Its at:', process.env.MONGO_URI)})
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, () => { console.log('Oh Snap! We got that exclusive intel!! Its at:', process.env.MONGO_URI )})
 
 // ROUTES
 app.get('/', (req, res) => {
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   app.use('/breads', breadsController)
   
   //Bakers 
-  const bakersController = require('./controllers/bakers_controllers')
+  const bakersController = require('./controllers/bakers_controllers.js')
   app.use('/bakers', bakersController)
   
   app.get('*', (req, res) => {
