@@ -1,7 +1,7 @@
 const express = require('express')
 const breads = express.Router()
 const Bread = require('../models/breads.js')
-const Baker = require('../models/baker')
+const Baker = require('../models/baker.js')
 const baker = require('./bakers_controllers.js')
 
 // INDEX
@@ -53,6 +53,7 @@ breads.get('/:id', (req, res) => {
       })
     })
     .catch (err => {
+      
       res.send('404')
     })
 })

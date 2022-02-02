@@ -36,7 +36,6 @@ app.get('/', (req, res) => {
     res.send('404')
   })
 
-
   // LISTEN
 app.listen(PORT, () => {
   console.log('nomming at port', PORT);
