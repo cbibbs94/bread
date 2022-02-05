@@ -6,8 +6,8 @@ const baker = require('./bakers_controllers.js')
 
 // INDEX
 breads.get('/', async (req, res) => {
-  const foundBakers = await Baker.find().lean()
-  const foundBreads = await Bread.find().limit(2).lean()
+  const foundBakers = await Baker.find()
+  const foundBreads = await Bread.find()
   res.render('index', {
     breads: foundBreads,
     bakers: foundBakers,
